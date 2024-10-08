@@ -1,32 +1,34 @@
+#PROGRAMA QUE CALCULA A DETERMINANTE DE UMA MATRIZ 3x3 NO METODO DE SARRUS
+
 from time import sleep
 
 matriz = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ]
 
-print('-'*32)
-print('CALCULADORA DE DETERMINANTE 3x3')
-print('-'*32)
 for linha in range(0, 3):
     for coluna in range(0, 3):
         matriz[linha][coluna] = (int(input(f'Digite o valor da posição [{linha+1}, {coluna+1}]: ')))
-        
+
+#Duplicação das duas primeiras colunas     
 for linha in range(0, 3):
     for coluna in range(0, 2):
         matriz[linha].append(matriz[linha][coluna])
         
-#Separa a lista do lado direito(esquerda para direita)
-contador = 0  
-listaDireito = []
+#Calculando a lista do lado direito(esquerdo para o direito)  
+determinanteDireita = 0
 for contador in range(0, 3):
-    for determinante in range(0,3):
-        listaDireito.append(matriz[determinante][determinante+contador])
- 
-#Separa a lista do lado esquerdo(direita para esquerda)
-contador = 0
-listaEsquerda = []
+    resultado = 1
+    for coluna in range(0,3):
+        resultado *= (matriz[coluna][coluna+contador])
+    determinanteDireita += resultado
+
+#Calculando a lista do lado esquerdo(direito para o esquerdo) 
+determinanteEsquerda = 0
 for contador in range(0, 3):
-    for determinante in range(2, -1, -1):
+    resultado = 1
+    for coluna in range(2, -1, -1):
         contador += 1
-        listaEsquerda.append(matriz[determinante][contador-1])
+        resultado *= (matriz[coluna][contador-1])
+    determinanteEsquerda += resultado
 
 print('\n\033[1mA matriz gerada\033[m\n')
 for linha in range(0, 3):
@@ -44,30 +46,6 @@ for linha in range(0, 3):
             print(f'[ {matriz[linha][coluna]:^1} ]', end='')
         sleep(0.5)
     print('\n')
-
-#Calculo da reta dos positivos  
-determinanteDireita = 0
-for contador in range(0, 3):
-    listaDireito = []
-    resultado = 1
-    for determinante in range(0,3):
-        listaDireito.append(matriz[determinante][determinante+contador])
-    for numero in listaDireito:
-        resultado *= numero
-    determinanteDireita += resultado
-
-#Calculo da reta dos negativo 
-determinanteEsquerda = 0
-for contador in range(0, 3):
-    listaEsquerda = []
-    resultado = 1
-    for determinante in range(2, -1, -1):
-        contador += 1
-        listaEsquerda.append(matriz[determinante][contador-1])
-        
-    for numero in listaEsquerda:
-        resultado *= numero
-    determinanteEsquerda += resultado
 
 resultado = determinanteDireita-determinanteEsquerda
 sleep(0.5)
