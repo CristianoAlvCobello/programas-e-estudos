@@ -1,7 +1,6 @@
 def montaMatriz(tamanho, sortear=False):
-    from random import randint
     """
-    Tamanho: tamanho da matriz quadrada, exemplos: 2x2, 3x3, 4x4...
+    Tamanho: tamanho da matriz quadrada, exemplos: 2 para 2x2, 3 para 3x3...
     No fim ele retorna uma lista onde a linha é outra lista e a 
     colunas os indices. 
     Exemplo:
@@ -12,6 +11,7 @@ def montaMatriz(tamanho, sortear=False):
 
     ou seja, matriz[0][0] == 1
     """
+    from random import randint
     matriz = []
     if sortear == False:
         #Solicitando o valor das posições
@@ -91,5 +91,5 @@ def determinante(matriz):
     resultado = determinanteDireita-determinanteEsquerda
     print(f'\033[1mResultado da determinante:\033[m \033[32;1m{resultado}\033[m')
 
-matriz = montaMatriz(3, True)
+matriz = montaMatriz(tamanho=3, sortear=True)
 determinante(matriz)
