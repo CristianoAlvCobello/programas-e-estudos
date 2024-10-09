@@ -3,24 +3,29 @@ def montaMatriz(QtdLinhas, QtdColunas):
     QtdLinhas: quantidade de linhas da matriz
     QtdColunas: quantidade de colunas da matriz 
     """
-    matriz = {}
+    matriz = []
 
-    for linha in range(0, QtdLinhas):
+    for linha in range(QtdLinhas):
         colunas = []
-        for coluna in range(0, QtdColunas):
-            colunas.append(int(input(f'Digite o valor da posição [{linha+1}][{coluna+1}]: ')))
-        matriz[f'{linha}'] = colunas.copy()
+        for coluna in range(QtdColunas):
+            valor = int(input(f'Digite o valor da posição [{linha + 1}][{coluna + 1}]: '))
+            colunas.append(valor)
+        matriz.append(colunas)
 
     print('\n\033[1mA matriz gerada\033[m\n')
-    for coluna in range(0, QtdColunas):
-        print(f'     {coluna} ', end='')
+    
+    # Imprime os cabeçalhos das colunas
+    print('     ', end='')
+    for coluna in range(QtdColunas):
+        print(f' {coluna}     ', end='')
     print('\n')
 
-    for linha in range(0, QtdLinhas):
+    # Imprime a matriz com cabeçalhos das linhas
+    for linha in range(QtdLinhas):
         print(f'{linha}  ', end='')
-        for coluna in range(0, QtdColunas):
-            print(f'[ {matriz[f'{linha}'][coluna]:^1} ]  ', end='')
+        for coluna in range(QtdColunas):
+            print(f'[{matriz[linha][coluna]:^5}]', end='')
         print('\n')
-
     print(matriz)
-montaMatriz(3, 4)
+
+montaMatriz(3, 3)
