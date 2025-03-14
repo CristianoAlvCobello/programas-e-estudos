@@ -43,8 +43,8 @@ input {
 }
 
 input:focus {
-    border-color: #ffcc00;
-    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+    border-color: #00b49c;
+    box-shadow: 0 0 5px #7bffed;
 }
 
 .button-group {
