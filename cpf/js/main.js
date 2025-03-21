@@ -72,8 +72,6 @@ gerar.addEventListener('click', function(){
     for (let indice = 0; indice <= 8; indice++) {
         cpf += Math.floor(Math.random() * 9);
     }
-
-    msg.innerHTML = cpf
     
     //PRIMEIRO VERIFICADOR
     //Concateno na string cpf o primeiro digito verificador
