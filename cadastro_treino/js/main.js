@@ -4,7 +4,7 @@ var cpf = document.getElementById('cpf')
 var rg = document.getElementById('rg')
 var idade = document.getElementById('idade')
 var ie = document.getElementById('ie')
-var nomeFantasioso = document.getElementById('nomeFantasioso')
+var nomeFantasia = document.getElementById('nomeFantasia')
 
 var msg = document.getElementsByClassName('msg')[0]
 var selecionar = document. getElementById('selecionar')
@@ -110,46 +110,46 @@ function validaCNPJ(cnpj){
         return false
     }
 }
-//MANUTENÇÃO
-// function ValidaIE(ie){
-//     let multiplicacao = 0
-//     let multiplicador = 1
-//     let soma = 0
-//     let verificador1 = 0
-//     let verificador2 = 0
 
-//     for(let indice = 0; indice <= 8; indice++) {
-//         if(multiplicador == 2 || multiplicador == 9){
-//             multiplicador++
-//         }
-//         multiplicacao = parseInt(ie[indice]) * multiplicador
-//         soma += multiplicacao
-//         multiplicador ++
-//     } if(soma % 11 < 2){
-//         verificador1 = 11 - soma % 11
-//     }
+function ValidaIE(ie){
+    let multiplicacao = 0
+    let multiplicador = 1
+    let soma = 0
+    let verificador1 = 0
+    let verificador2 = 0
 
-//     multiplicacao = 0
-//     multiplicador = 4
-//     soma = 0
+    for(let indice = 0; indice <= 8; indice++) {
+        if(multiplicador == 2 || multiplicador == 9){
+            multiplicador++
+        }
+        multiplicacao = parseInt(ie[indice]) * multiplicador
+        soma += multiplicacao
+        multiplicador ++
+    } 
+     if(soma % 11 < 2){
+        verificador1 = 11 - soma % 11
+    }
 
-//     for(let indice = 8; indice >= 0; indice--) {
-//         if(multiplicador == 11){
-//             multiplicador = 2
-//         }
-//         multiplicacao = parseInt(ie[indice]) * multiplicador
-//         soma += multiplicacao
-//         multiplicador ++
-//     }if(soma % 11 < 2){
-//         verificador2 = 11 - soma % 11
-//     }
+    multiplicacao = 0
+    multiplicador = 2
+    soma = 0
 
-//     if(ie[9] == verificador1 && ie[10] == verificador2){
-//         return true
-//     }else{
-//         return false
-//     }
-// }
+    for(let indice = 10; indice >= 0; indice--) {
+        if(multiplicador == 11){
+            multiplicador = 2
+        }
+        multiplicacao = parseInt(ie[indice]) * multiplicador
+        soma += multiplicacao
+        multiplicador ++
+    }
+    verificador2 = soma % 11
+
+    if(ie[8] == verificador1 && ie[11] == verificador2){
+        return true
+    }else{
+        return verificador2
+    }
+}
 
 function limpaString(string){
     return string.trim().replaceAll(/[.\,\-\s\/]/g, '')
@@ -169,6 +169,8 @@ function formataString(string, tipo){
 proximo.addEventListener('click', function(){
 
     msg.innerHTML = ''
+    // let algo = '110042490114'
+    // msg.innerHTML = ValidaIE(algo)
     pfForm.classList.add('esconder')
     pjForm.classList.add('esconder')
 
@@ -228,15 +230,17 @@ validar.addEventListener('click', function(){
         }else{
             cnpj.value = formataString(cnpjLimpo, 'cnpj')
         }
-        //Nome Fantasioso
-        if(nomeFantasioso.value.trim() == ''){
-            msg.innerHTML += '<li>Nome Fantioso Vázio</li>'
+        //Nome Fantasia
+        if(nomeFantasia.value.trim() == ''){
+            msg.innerHTML += '<li>Nome Fantasia Vázio</li>'
         }
         //IE
-        if(ieLimpo.length != 10){
+        if(ieLimpo.length != 12){
             msg.innerHTML += '<li>IE Incompleto</li>'
         }else if(ValidaIE(ieLimpo) == false){
             msg.innerHTML += '<li>IE Inválido</li>'
+        }else{
+            formataString(ieLimpo, 'ie')
         }
         //Caso tudo esteja correto
         if(msg.innerHTML == ''){
