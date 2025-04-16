@@ -12,25 +12,34 @@ var numerosFiltrados = []
 
 //Inputs
 var numero = document.getElementById('numero')
+var ordem = document.getElementById('ordem')
 
 //CheckBox
-var ordenarCheckbox = document.getElementById('ordenarCheckox')
+var ordenarCheckbox = document.getElementById('ordenarCheckbox')
+
+function mostrarMensagem(array, mensagem){
+    //Resetando a mensagem
+    mensagem.innerHTML = ''
+    //forEach para exibir a mensagem
+    array.forEach(numero => mensagem.innerHTML += `${numero} `);
+}
 
 inserir.addEventListener('click', function(){
     if(numero.value != ''){
         //Adiciona o Valor no Array
         numerosInseridos.push(Number(numero.value))
-        MsgInseridos.innerHTML += `${numero.value} `
-
+        //Ordena caso checkbox esteja marcado
+        if(ordenarCheckbox.checked){
+            if(ordem.value == 'crescente'){
+                numerosInseridos.sort((a,b) => a - b) 
+            }else if(ordem.value == 'decrescente'){
+                numerosInseridos.reverse((a,b) => a - b)
+            }
+        }
+        mostrarMensagem(numerosInseridos, MsgInseridos)
         //Limpa o Input para o usuário 
         numero.value = null   
     }
-    //Limpando a Mensagem a cada número adicionado
-    MsgInseridos.innerHTML = ''
-    //Função que ordena numeros
-    numerosInseridos.sort((a, b) => a - b)
-    //forEach para exibir a mensagem
-    numerosInseridos.forEach(numero => MsgInseridos.innerHTML += `${numero} `);
 })
 
 limpar.addEventListener('click', function(){
@@ -61,11 +70,6 @@ filtrar.addEventListener('click', function(){
             }
         }
     })
-    //Limpando a Mensagem a cada número adicionado
-    MsgFiltrados.innerHTML = ''
-    //Função que ordena numeros
-    numerosFiltrados.sort((a, b) => a - b)
-    //forEach para exibir a mensagem
-    numerosFiltrados.forEach(numero => MsgFiltrados.innerHTML += `${numero} `);
+    mostrarMensagem(numerosFiltrados, MsgFiltrados)
 })
 
