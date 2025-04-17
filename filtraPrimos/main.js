@@ -13,9 +13,20 @@ var numerosFiltrados = []
 //Inputs
 var numero = document.getElementById('numero')
 var ordem = document.getElementById('ordem')
-
-//CheckBox
 var ordenarCheckbox = document.getElementById('ordenarCheckbox')
+
+//Agrupando inputs
+var grupoInputs = [ordenarCheckbox, ordem]
+
+function ordenaNumeros(array, ordem){
+    if(ordenarCheckbox.checked){
+        if(ordem == 'crescente'){
+            array.sort((a,b) => a - b) 
+        }else if(ordem == 'decrescente'){
+            array.sort((a,b) => b - a)
+        }
+    }
+}
 
 function mostrarMensagem(array, mensagem){
     //Resetando a mensagem
@@ -24,18 +35,27 @@ function mostrarMensagem(array, mensagem){
     array.forEach(numero => mensagem.innerHTML += `${numero} `);
 }
 
+grupoInputs.forEach(input => {
+    input.addEventListener('change', function(){
+        ordenaNumeros(numerosInseridos, ordem.value) 
+        mostrarMensagem(numerosInseridos, MsgInseridos)
+        ordenaNumeros(numerosFiltrados, ordem.value)
+        mostrarMensagem(numerosFiltrados, MsgFiltrados)
+    })  
+})
+
+numero.addEventListener('keydown', function(tecla){
+    if (tecla.key === 'Enter') {
+        tecla.preventDefault()
+        inserir.click()
+    }
+})
+
 inserir.addEventListener('click', function(){
     if(numero.value != ''){
         //Adiciona o Valor no Array
         numerosInseridos.push(Number(numero.value))
-        //Ordena caso checkbox esteja marcado
-        if(ordenarCheckbox.checked){
-            if(ordem.value == 'crescente'){
-                numerosInseridos.sort((a,b) => a - b) 
-            }else if(ordem.value == 'decrescente'){
-                numerosInseridos.reverse((a,b) => a - b)
-            }
-        }
+        ordenaNumeros(numerosInseridos, ordem.value)
         mostrarMensagem(numerosInseridos, MsgInseridos)
         //Limpa o Input para o usuário 
         numero.value = null   
@@ -70,6 +90,7 @@ filtrar.addEventListener('click', function(){
             }
         }
     })
+    ordenaNumeros(numerosFiltrados, ordem.value)
     mostrarMensagem(numerosFiltrados, MsgFiltrados)
 })
 
