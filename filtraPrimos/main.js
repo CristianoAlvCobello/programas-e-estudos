@@ -9,6 +9,7 @@ var MsgFiltrados = document.getElementsByClassName('MsgFiltrados')[0]
 //Arrays
 var numerosInseridos = []
 var numerosFiltrados = []
+var numerosComOuSemOrdem = []
 
 //Inputs
 var numero = document.getElementById('numero')
@@ -19,13 +20,16 @@ var ordenarCheckbox = document.getElementById('ordenarCheckbox')
 var grupoInputs = [ordenarCheckbox, ordem]
 
 function ordenaNumeros(array, ordem){
+    var arrayParaOrdem = []
+    arrayParaOrdem = [...array]
     if(ordenarCheckbox.checked){
         if(ordem == 'crescente'){
-            array.sort((a,b) => a - b) 
+            arrayParaOrdem.sort((a,b) => a - b) 
         }else if(ordem == 'decrescente'){
-            array.sort((a,b) => b - a)
+            arrayParaOrdem.sort((a,b) => b - a)
         }
     }
+    return arrayParaOrdem
 }
 
 function mostrarMensagem(array, mensagem){
@@ -37,10 +41,9 @@ function mostrarMensagem(array, mensagem){
 
 grupoInputs.forEach(input => {
     input.addEventListener('change', function(){
-        ordenaNumeros(numerosInseridos, ordem.value) 
-        mostrarMensagem(numerosInseridos, MsgInseridos)
-        ordenaNumeros(numerosFiltrados, ordem.value)
-        mostrarMensagem(numerosFiltrados, MsgFiltrados)
+        numerosInseridos.push(Number(numero.value))
+        numerosComOuSemOrdem = ordenaNumeros(numerosInseridos, ordem.value)
+        mostrarMensagem(numerosComOuSemOrdem, MsgInseridos)
     })  
 })
 
@@ -55,8 +58,8 @@ inserir.addEventListener('click', function(){
     if(numero.value != ''){
         //Adiciona o Valor no Array
         numerosInseridos.push(Number(numero.value))
-        ordenaNumeros(numerosInseridos, ordem.value)
-        mostrarMensagem(numerosInseridos, MsgInseridos)
+        numerosComOuSemOrdem = ordenaNumeros(numerosInseridos, ordem.value)
+        mostrarMensagem(numerosComOuSemOrdem, MsgInseridos)
         //Limpa o Input para o usuário 
         numero.value = null   
     }
