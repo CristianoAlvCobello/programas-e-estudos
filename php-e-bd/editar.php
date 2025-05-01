@@ -1,4 +1,10 @@
-<?php include "includes/header.php" ?>
+<?php include "includes/header.php";
+
+    if(isset($_GET["id"])){
+        $id = (int)$_GET["id"];
+        $usuario = $conexao->query("SELECT * FROM usuarios WHERE id=$id")->fetch_assoc();
+    }
+?>
 
 <div class="container mt-5">
     <div class="row d-flex justify-content-center">
@@ -11,19 +17,19 @@
                     <div class="msgErro text-danger fw-bold">
                         <!--Preenchido por JS-->
                     </div>
-                    <form method="post">
+                    <form method="post" id="cadastro">
                         <div class="mb-3">
                             <label>Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control border-dark">
+                            <input value="<?php echo $usuario["nome"];?>" type="text" id="nome" name="nome" class="form-control border-dark">
 
                             <label>Email</label>
-                            <input type="text" id="email" name="email" class="form-control border-dark">
+                            <input value="<?php echo $usuario["email"];?>" type="text" id="email" name="email" class="form-control border-dark">
 
                             <label>Senha</label>
-                            <input type="password" id="senha" name="senha" class="form-control border-dark">
+                            <input value="<?php echo $usuario["senha"];?>" id="senha" name="senha" class="form-control border-dark">
 
                             <label>Data de Nascimento</label>
-                            <input type="date" id="nascimento" name="nascimento" class="form-control border-dark">        
+                            <input value="<?php echo $usuario["nascimento"];?>" type="date" id="nascimento" name="nascimento" class="form-control border-dark">        
                         </div>
                         <button type="submit" id="salvar" name="salvar" class="btn btn-primary">Salvar</button>
                     </form>
@@ -33,7 +39,7 @@
     </div>
 </div>
 
-<?php
+<?php 
     $nome = $_POST['nome'] ?? "";
     $email = $_POST['email'] ?? "";
     $senha = $_POST['senha'] ?? "";
@@ -41,13 +47,12 @@
     $nascimento = date("Y-m-d", strtotime($nascimento));
     
     if(isset($_POST["salvar"])){
-        $sql = $conexao->prepare("INSERT INTO usuarios (nome, email, senha, nascimento) VALUES (?, ?, ?, ?)");
+        $sql = $conexao->prepare("UPDATE usuarios SET nome=(?), email=(?), senha=(?), nascimento=(?) WHERE id=$id");
         $sql->bind_param('ssss', $nome, $email, $senha, $nascimento);
         $sql->execute();
         header("location: index.php");
         exit;
     }
 
-?>
 
-<?php include "includes/footer.php" ?>
+include "includes/footer.php" ?>

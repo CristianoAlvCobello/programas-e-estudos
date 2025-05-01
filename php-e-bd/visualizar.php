@@ -6,8 +6,8 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Visualização
-                        <a href="listar.php" class="btn btn-warning float-end"><i class="bi bi-arrow-return-left"></i></a>
-                        <a href="cadastra.php" class="btn btn-primary float-end">Cadastrar usuário</a>
+                        <a href="index.php" class="btn btn-warning float-end"><i class="bi bi-arrow-return-left"></i></a>
+                        <a href="cadastrar.php" class="btn btn-primary float-end me-2">Cadastrar usuário</a>
                     </h2>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
