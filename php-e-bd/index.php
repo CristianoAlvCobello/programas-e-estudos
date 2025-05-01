@@ -14,7 +14,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Lista De Usuários
-                        <a href="cadastrar.php" class="btn btn-primary float-end">Cadastrar usuário</a>
+                        <a href="cadastrar-editar.php?objetivo=cadastrar" class="btn btn-primary float-end">Cadastrar usuário</a>
                     </h2>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
@@ -32,7 +32,7 @@
                                             echo "<td>" . $linha["nome"] . "</td>";
                                             echo "<td>";
                                             echo '<a href="visualizar.php?id=' . $linha["id"] . '" class="btn btn-secondary btn-sm"><i class="bi bi-eye"></i> Visualizar</a> ';
-                                            echo '<a href="editar.php?id=' . $linha["id"] . '" class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i> Editar</a> ';
+                                            echo '<a href="cadastrar-editar.php?id=' . $linha["id"] . '&objetivo=editar " class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i> Editar</a> ';
                                             echo '<a href="?deletar=' . $linha["id"] . '" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Deletar</a>';
                                             echo "</td>";
                                             echo "</tr>";

@@ -5,6 +5,8 @@ var nascimento = document.getElementById("nascimento")
 var cadastro = document.getElementById("cadastro")
 var msgErro = document.getElementsByClassName("msgErro")[0]
 
+var pessoas = localStorage.getItem('asdas') || []
+
 cadastro.addEventListener('submit', function(btnSalvar){
     msgErro.innerHTML = ''
 
@@ -15,7 +17,7 @@ cadastro.addEventListener('submit', function(btnSalvar){
 
     posArroba = email.value.indexOf("@")
     posPonto = email.value.indexOf(".")
-    if(posArroba <= 0 || posPonto < posArroba || posPonto < posArroba+1){
+    if(posArroba <= 0 || posPonto < posArroba || posPonto == posArroba+1){
         msgErro.innerHTML += "<li>Email inválido</li>"
         btnSalvar.preventDefault()
     }
