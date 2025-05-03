@@ -33,23 +33,23 @@ var blocos = {
 }
 
 function desenharBloco(mensagem, matriz, tempoInicial = 0) {
-    const blocoHTML = document.getElementById(mensagem)
-    blocoHTML.innerHTML = ''
+    let div = document.getElementById(mensagem)
+    div.innerHTML = ''
         for (let linha = 0; linha < matriz.length; linha++) {
             for (let coluna = 0; coluna < matriz[linha].length; coluna++) {
-                const quadrado = document.createElement('i')
+                let quadrado = document.createElement('i')
                 quadrado.classList.add('bi')
                 quadrado.classList.add('bi-square')
-                blocoHTML.appendChild(quadrado)
-                if (matriz[linha][coluna] === 1) {
-                    const tempoParaColorir = tempoInicial + (linha * matriz[linha].length + coluna) * 50;
+                div.appendChild(quadrado)
+                if (matriz[linha][coluna] == 1) {
+                    let tempoParaColorir = tempoInicial + (linha * matriz[linha].length + coluna) * 50;
                     setTimeout(() => {
                     quadrado.classList.remove('bi-square')
                     quadrado.classList.add('bi-square-fill')
                     }, tempoParaColorir)
                 }
             }
-          blocoHTML.appendChild(document.createElement("br"))
+          div.appendChild(document.createElement("br"))
         }
 }
 
