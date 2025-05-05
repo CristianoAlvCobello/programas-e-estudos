@@ -24,6 +24,7 @@ body {
 }
 
 .bi-square {
+  color: black;
   opacity: 0.1;
   transition: 0.3s;
 }
