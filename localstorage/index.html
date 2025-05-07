@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Recordes de cubo mágico</h1>
+    
+    <input type="text" id="nome" placeholder="Nome"><br>
+    
+    <select id="categoria">
+        <option value="3x3">2x2</option>
+        <option value="3x3">3x3</option>
+        <option value="3x3">4x4</option>
+        <option value="3x3">5x5</option>
+    </select><br>
+
+    <input type="text" id="recorde" placeholder="Tempo" maxlength="4"><br>
+    <button type="button" id="gravar">gravar</button>
+
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Recorde</th>
+            <th>Ações</th>
+        </thead>
+        <tbody id="tabela">
+            
+        </tbody>
+    </table>
+</body>
+<script src="main.js"></script>
+</html>
