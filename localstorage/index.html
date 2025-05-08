@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>LocalStorage</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Recordes de cubo mágico</h1>
-    
+    <div id="titulo">
+        <h1>Recordes de Cubo Mágico</h2>
+        <img src="cubo-magico.png" alt="">
+    </div>
+
+    <div id="msgErro">
+
+    </div>
+
     <input type="text" id="nome" placeholder="Nome"><br>
+    <input type="number" id="recorde" placeholder="Recorde"><br>
     
     <select id="categoria">
-        <option value="3x3">2x2</option>
+        <!--Categorias NxNxN-->
+        <option value="2x2">2x2</option>
         <option value="3x3">3x3</option>
-        <option value="3x3">4x4</option>
-        <option value="3x3">5x5</option>
+        <option value="4x4">4x4</option>
+        <option value="5x5">5x5</option>
+        <option value="6x6">6x6</option>
+        <option value="7x7">7x7</option>
+        <!--Categorias alternativas-->
+        <option value="Pyraminx">Pyraminx</option>
+        <option value="Megaminx">Megaminx</option>
+        <option value="Clock">Clock</option>
+        <option value="Skewb">Skewb</option>
+        <option value="Square-1">Square-1</option>
+        <option value="3BLD">3BLD</option>
+        <option value="4BLD">4BLD</option>
+        <option value="FMC">FMC</option>
+        <option value="MBLD">MBLD</option>
     </select><br>
 
-    <input type="text" id="recorde" placeholder="Tempo" maxlength="4"><br>
     <button type="button" id="gravar">gravar</button>
 
     <table>
         <thead>
-            <th>Nome</th>
-            <th>Categoria</th>
-            <th>Recorde</th>
+            <th>Nomes</th>
+            <th>Categorias</th>
+            <th>Recordes</th>
             <th>Ações</th>
         </thead>
         <tbody id="tabela">

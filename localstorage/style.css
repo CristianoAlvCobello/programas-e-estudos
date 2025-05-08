@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Título */
+#titulo{
+    margin-top: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    color: #00bcd4;
+}
+
+/* Formulário centralizado */
+input, select, #gravar {
+    text-align: center;
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+input::placeholder {
+    color: #808080;
+}
+
+#nome{
+    width: 15em;
+}
+
+#recorde {
+    width: 15em;
+}
+
+select {
+    width: 15em;
+}
+
+#gravar {
+    width: 10em;
+    background-color: #00bcd4;
+    color: #121212;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#gravar:hover {
+    background-color: #008c9e;
+}
+
+/* Tabela */
+table {
+    width: 80%;
+    max-width: 700px;
+    margin-top: 30px;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+th {
+    background-color: #00bcd4;
+    color: #121212;
+}
+
+tr:hover {
+    background-color: #2a2a2a;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+#msgErro{
+    font-weight: bold;
+    color: red;
+    margin-bottom: 1.5em;
+}
+
+.excluir{
+    border-style: none;
+    height: 2em;
+    width: 5em;
+    color: white;
+    background-color: red;
+}

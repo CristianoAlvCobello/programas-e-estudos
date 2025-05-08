@@ -8,6 +8,7 @@ var gravar = document.getElementById("gravar")
 
 //Mensagem
 var tabela = document.getElementById('tabela')
+var msgErro = document.getElementById('msgErro')
 
 //Lista de objetos
 var recordistas = JSON.parse(localStorage.getItem('recordistas')) || []
@@ -20,7 +21,7 @@ function mostraTabela(){
                    <td>${recordista.nome}
                    <td>${recordista.categoria}
                    <td>${recordista.recorde}
-                   <td><button type="button" onclick="excluir(${recordista.id})">Excluir</button>
+                   <td><button class="excluir" type="button" onclick="excluir(${recordista.id})">Excluir</button>
                    </td>
                    `
     })
@@ -44,18 +45,70 @@ function excluir(id){
     mostraTabela()
 }
 
+function limpaInputs(){
+    nome.value = ''
+    recorde.value = ''
+}
+
+mostraTabela()
+
+function enter(tecla){
+    if (tecla.key === 'Enter') {
+        gravar.click()
+    }
+}
+
+nome.addEventListener('keydown', function (tecla){
+    if (tecla.key === 'Enter') {
+        gravar.click()
+    }
+})
+recorde.addEventListener('keydown', function (tecla){
+    if (tecla.key === 'Enter') {
+        gravar.click()
+    }
+})
+
 gravar.addEventListener('click', function(){
-    let id = autoIncremento()
-    //Preenchendo os dados da pessoa
-    recordistas.push({
-        'id' : id,
-        'nome' : nome.value,
-        'categoria' : categoria.value,
-        'recorde' : recorde.value
-    })
+    msgErro.innerHTML = ''
+    let RecordistaCategoriaIgual = recordistas.find((recordista) => recordista.categoria == categoria.value)
 
-    //Enviando ao localStorage
-    localStorage.setItem('recordistas', JSON.stringify(recordistas))
+    if(nome.value.trim() == ''){
+        msgErro.innerHTML += "<li>Nome Vazio"
+    }if(recorde.value.trim() == ''){
+        msgErro.innerHTML += "<li>Recorde Incompleto"
+    }else if(isNaN(recorde.value) || recorde.value <= 0){
+        msgErro.innerHTML += "<li>Recorde Inválido"
+    }if(RecordistaCategoriaIgual){
+        if(RecordistaCategoriaIgual.recorde <= parseFloat(recorde.value)){
+            msgErro.innerHTML += `<li>Recorde ${categoria.value} deve ser menor`
+        }
+    }
+    
+    if(msgErro.innerHTML == ''){
 
-    mostraTabela()
+        if(RecordistaCategoriaIgual){
+            recordistas.filter((recordista) => {
+                if(recordista.categoria == categoria.value){
+                    recordista.nome = nome.value
+                    recordista.recorde = recorde.value
+                }
+                return recordista
+            })
+        }
+        else{
+            let id = autoIncremento()
+            recordistas.push({
+                'id' : id,
+                'nome' : nome.value,
+                'categoria' : categoria.value,
+                'recorde' : recorde.value
+            })
+        }
+
+        //Enviando ao localStorage
+        localStorage.setItem('recordistas', JSON.stringify(recordistas))
+        mostraTabela()
+        limpaInputs()
+    }
 })  
