@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+  <div>
+    <input id="tarefa" type="text" placeholder="Digite uma tarefa">
+    <button id="adicionar" type="button">Adicionar</button>
+  </div>
+
+  <select id="filtro" onchange="montaLista()">
+    <option value="todas">Todas</option>
+    <option value="concluidas">Concluídas</option>
+    <option value="pendentes">Pendentes</option>
+  </select>
+
+  <table id="tabelaDeTarefas">
+    <!-- Tarefas aparecerão aqui via JS -->
+  </table>
+
+</body>
+<script src="main.js"></script>
+</html>

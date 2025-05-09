@@ -52,12 +52,6 @@ function limpaInputs(){
 
 mostraTabela()
 
-function enter(tecla){
-    if (tecla.key === 'Enter') {
-        gravar.click()
-    }
-}
-
 nome.addEventListener('keydown', function (tecla){
     if (tecla.key === 'Enter') {
         gravar.click()
