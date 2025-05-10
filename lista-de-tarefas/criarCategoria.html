@@ -20,10 +20,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+          <a class="nav-link" aria-current="page" href="index.html">Início</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="criarCategoria.html">Criar Categoria</a>
+          <a class="nav-link active" href="criarCategoria.html">Criar Categoria</a>
         </li>
       </ul>
     </div>
@@ -35,48 +35,35 @@
       <div class="col-12 col-sm-10 col-md-6 col-lg-4">
         <form>
           <div class="mb-3">
-            <input id="tarefa" type="text" class="form-control" placeholder="Digite uma tarefa">
+            <input id="categoria" type="text" class="form-control" placeholder="Digite uma Categoria">
           </div>
-          <div class="mb-3">
-            <select onchange="montaLista()" class="categoriasSelect form-select text-center d-none">
-              <option value="todas">Todas Categorias</option>
-                <!--JS-->
-            </select>
-          </div>
-          <div class="d-grid mb-3">
-            <button class="btn btn-success" id="adicionar" type="button">Adicionar</button>
-          </div>
-          <div class="mb-3">
-            <select onchange="montaLista()" class="form-select text-center" id="filtro">
-              <option value="todas">Todas Tarefas</option>
-              <option value="concluidas">Concluídas</option>
-              <option value="pendentes">Pendentes</option>
-            </select>
+          <div class="d-grid">
+            <button id="criarCategoria" class="btn btn-info" type="button">Criar Categoria</button>
           </div>
         </form>
       </div>
     </div>
 
     <div class="row justify-content-center mt-5">
-      <div class="col-lg-7 col-sm-12 col-md-12">
+      <div class="col-lg-4 col-sm-12 col-md-12">
         <div class="table-responsive">
           <table class="table table-dark table-bordered text-center align-middle" id="tabelaDeTarefas">
             <thead class="table-active text-dark">
               <tr>
-                <th>Status</th>
-                <th>Tarefa</th>
+                <th>Categorias</th>
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody id="tabelaHtml">
-              <!--JS-->
+            <tbody id="tabelaHtmlCategoria">
+
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
+
 </body>
-<script src="main.js"></script>
+<script src="criaCategoria.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </html>

@@ -9,9 +9,11 @@ var filtro = document.getElementById('filtro')
 
 //Html lista
 var tabelaHTML = document.getElementById('tabelaHtml')
+var categoriasSelect = document.getElementsByClassName('categoriasSelect')[0]
 
 //LocalStorage
 var listaDeTarefas = JSON.parse(localStorage.getItem('listaDeTarefas')) || []
+var categorias = JSON.parse(localStorage.getItem('categorias')) || []
 
 function autoIncrementar(){
     id = parseInt(JSON.parse(localStorage.getItem('id'))) || 0
@@ -20,13 +22,17 @@ function autoIncrementar(){
     return id
 }
 
-function montaLista(){
+function montaLista(lista){
     if(filtro.value == 'concluidas'){
         lista = listaDeTarefas.filter((tarefa) => tarefa.concluido == true)
     }else if(filtro.value == 'pendentes'){
         lista = listaDeTarefas.filter((tarefa) => tarefa.concluido == false)
     }else{
         lista = [...listaDeTarefas]
+    }
+
+    if(categoriasSelect.value != 'todas'){
+        lista = lista.filter((tarefa) => tarefa.categoria  == categoriasSelect.value)
     }
 
     tabelaHTML.innerHTML = ''
@@ -42,6 +48,16 @@ function montaLista(){
                                     <td class="excluir">${excluir}
                                 </tr>`
     })
+}
+
+function montaSelect(){
+    if(categorias.length > 0){
+        categoriasSelect.classList.remove('d-none')
+        categorias.forEach(categoria => {
+            let option = `<option value="${categoria.nome}">${categoria.nome}</option>`
+            categoriasSelect.innerHTML += option
+        })
+    }
 }
 
 function excluir(id){
@@ -65,26 +81,26 @@ function alteraStatus(id){
 }
 
 montaLista()
+montaSelect()
 
 tarefa.addEventListener('keydown', function(tecla){
     if(tecla.key == 'Enter'){
         adicionar.click()
+        tecla.preventDefault()
     }
 })
 
 adicionar.addEventListener('click', function(){
-    let id = autoIncrementar()
-
     if(tarefa.value.trim() != ''){
+        let id = autoIncrementar()
         listaDeTarefas.push({
             "id" : id,
             "tarefa" : tarefa.value,
-            "concluido" : false
+            "concluido" : false,
+            "categoria" : categoriasSelect.value
         })
+        localStorage.setItem('listaDeTarefas', JSON.stringify(listaDeTarefas))
+        limpaInput()
+        montaLista()
     }
-
-    localStorage.setItem('listaDeTarefas', JSON.stringify(listaDeTarefas))
-
-    limpaInput()
-    montaLista()
 })
