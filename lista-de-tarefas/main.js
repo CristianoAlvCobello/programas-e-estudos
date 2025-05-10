@@ -79,7 +79,7 @@ adicionar.addEventListener('click', function(){
         listaDeTarefas.push({
             "id" : id,
             "tarefa" : tarefa.value,
-            "categoria" : false
+            "concluido" : false
         })
     }
 
