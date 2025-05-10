@@ -8,7 +8,7 @@ var adicionar = document.getElementById('adicionar')
 var filtro = document.getElementById('filtro')
 
 //Html lista
-var tabelaHTML = document.getElementById('tabelaDeTarefas')
+var tabelaHTML = document.getElementById('tabelaHtml')
 
 //LocalStorage
 var listaDeTarefas = JSON.parse(localStorage.getItem('listaDeTarefas')) || []
@@ -31,15 +31,15 @@ function montaLista(){
 
     tabelaHTML.innerHTML = ''
     lista.forEach(tarefa => {
-        let checkbox = `<input onchange="alteraStatus(${tarefa.id})" type="checkbox"></input>`
-        let excluir = `<button onclick="excluir(${tarefa.id})" class="botao-remover" type="button">excluir</button>`
+        let checkbox = `<input onchange="alteraStatus(${tarefa.id})" class="checkbox" type="checkbox"></input>`
+        let excluir = `<button onclick="excluir(${tarefa.id})" class="btn btn-danger" type="button"><i class="bi bi-trash"></i></button>`
         if(tarefa.concluido == true){
             checkbox = `<input onchange="alteraStatus(${tarefa.id})" type="checkbox" checked></input>`
         }
         tabelaHTML.innerHTML += `<tr>
-                                    <td>${checkbox}
+                                    <td class="tdcheckbox">${checkbox}
                                     <td>${tarefa.tarefa}
-                                    <td>${excluir}
+                                    <td class="excluir">${excluir}
                                 </tr>`
     })
 }
@@ -79,7 +79,7 @@ adicionar.addEventListener('click', function(){
         listaDeTarefas.push({
             "id" : id,
             "tarefa" : tarefa.value,
-            "concluido" : false
+            "categoria" : false
         })
     }
 

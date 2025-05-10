@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de tarefas</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de tarefas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-dark text-white">
 
-  <div>
-    <input id="tarefa" type="text" placeholder="Digite uma tarefa">
-    <button id="adicionar" type="button">Adicionar</button>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-6 col-lg-4">
+        <form>
+          <div class="mb-3">
+            <input id="tarefa" type="text" class="form-control" placeholder="Digite uma tarefa">
+          </div>
+          <div class="mb-3">
+            <select class="form-select text-center" id="filtro" onchange="montaLista()">
+              <option value="todas">Todas</option>
+              <option value="concluidas">Concluídas</option>
+              <option value="pendentes">Pendentes</option>
+            </select>
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-success" id="adicionar" type="button">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-7 col-sm-12 col-md-12">
+        <div class="table-responsive">
+          <table class="table table-dark table-bordered text-center align-middle" id="tabelaDeTarefas">
+            <thead class="table-active text-dark">
+              <tr>
+                <th>Status</th>
+                <th>Tarefa</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaHtml">
+              <!--js-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <select id="filtro" onchange="montaLista()">
-    <option value="todas">Todas</option>
-    <option value="concluidas">Concluídas</option>
-    <option value="pendentes">Pendentes</option>
-  </select>
-
-  <table id="tabelaDeTarefas">
-    <!-- Tarefas aparecerão aqui via JS -->
-  </table>
-
+  <script src="main.js"></script>
 </body>
-<script src="main.js"></script>
 </html>
