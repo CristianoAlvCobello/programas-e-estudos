@@ -18,7 +18,7 @@ body {
 }
 
 .msg {
-  font-size: 15px;
+  font-size: 10px;
   line-height: 1;
   text-align: center;
 }
@@ -48,7 +48,7 @@ body {
 
 button {
   margin-top: 30px;
-  padding: 20px 30px;
+  padding: 30px 40px;
   background-color: red;
   color: white;
   border: none;
