@@ -40,6 +40,13 @@ function limpaInput(){
 
 montaLista()
 
+categoria.addEventListener('keydown', function(tecla){
+    if(tecla.key == 'Enter'){
+        criarCategoria.click()
+        categoria.preventDefault()
+    }
+})
+
 criarCategoria.addEventListener('click', function(){
     if(categoria.value.trim() != ''){
         let id = autoIncrementar()
