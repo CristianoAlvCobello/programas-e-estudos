@@ -2,7 +2,7 @@
 var tarefa = document.getElementById('tarefa')
 
 //Botão
-var adicionar = document.getElementById('adicionar')
+var gravar = document.getElementById('gravar')
 
 //Select para filtrar
 var filtro = document.getElementById('filtro')
@@ -10,6 +10,7 @@ var filtro = document.getElementById('filtro')
 //Html lista
 var tabelaHTML = document.getElementById('tabelaHtml')
 var categoriasSelect = document.getElementsByClassName('categoriasSelect')[0]
+var alert = document.getElementsByClassName('alert')[0]
 
 //LocalStorage
 var listaDeTarefas = JSON.parse(localStorage.getItem('listaDeTarefas')) || []
@@ -23,6 +24,13 @@ function autoIncrementar(){
 }
 
 function montaLista(lista){
+    let titulo = document.getElementById('titulo')
+    titulo.innerHTML = 'Lista de Tarefas'
+    
+    if(categoriasSelect.value != 'sem categoria'){
+        titulo.innerHTML += ` - ${categoriasSelect.value}`
+    }
+
     if(filtro.value == 'concluidas'){
         lista = listaDeTarefas.filter((tarefa) => tarefa.concluido == true)
     }else if(filtro.value == 'pendentes'){
@@ -31,19 +39,19 @@ function montaLista(lista){
         lista = [...listaDeTarefas]
     }
 
-    if(categoriasSelect.value != 'todas'){
+    if(categoriasSelect.value != 'sem categoria'){
         lista = lista.filter((tarefa) => tarefa.categoria  == categoriasSelect.value)
     }
 
     tabelaHTML.innerHTML = ''
     lista.forEach(tarefa => {
-        let checkbox = `<input onchange="alteraStatus(${tarefa.id})" class="checkbox" type="checkbox"></input>`
+        let checkbox = `<td class="tdcheckbox bg-warning"><input onchange="alteraStatus(${tarefa.id})" class="checkbox" type="checkbox"></input>`
         let excluir = `<button onclick="excluir(${tarefa.id})" class="btn btn-danger" type="button"><i class="bi bi-trash"></i></button>`
         if(tarefa.concluido == true){
-            checkbox = `<input onchange="alteraStatus(${tarefa.id})" type="checkbox" checked></input>`
+            checkbox = `<td class="tdcheckbox bg-success"><input onchange="alteraStatus(${tarefa.id})" type="checkbox" checked></input>`
         }
         tabelaHTML.innerHTML += `<tr>
-                                    <td class="tdcheckbox">${checkbox}
+                                    ${checkbox}
                                     <td>${tarefa.tarefa}
                                     <td class="excluir">${excluir}
                                 </tr>`
@@ -85,12 +93,14 @@ montaSelect()
 
 tarefa.addEventListener('keydown', function(tecla){
     if(tecla.key == 'Enter'){
-        adicionar.click()
+        gravar.click()
         tecla.preventDefault()
     }
 })
 
-adicionar.addEventListener('click', function(){
+gravar.addEventListener('click', function(){
+    alert.classList.add('d-none')
+    alert.innerHTML = "Preencha uma tarefa"
     if(tarefa.value.trim() != ''){
         let id = autoIncrementar()
         listaDeTarefas.push({
@@ -102,5 +112,8 @@ adicionar.addEventListener('click', function(){
         localStorage.setItem('listaDeTarefas', JSON.stringify(listaDeTarefas))
         limpaInput()
         montaLista()
+    }else{
+        alert.classList.remove('d-none')
+        alert.innerHTML = "Anote uma tarefa"
     }
 })
